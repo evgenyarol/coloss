@@ -1,5 +1,5 @@
 const mongoose = require('../../../db/db');
-const { Schema: {Types: { String, Date, Number}}} = mongoose;
+const { Schema: {Types: { String, Object, Number}}} = mongoose;
 
 const contract = mongoose.Schema({
     contractId: { type: Number, required: true },
@@ -17,7 +17,7 @@ const contract = mongoose.Schema({
         required: true
     },
     paymentContract: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Object,
         ref: 'PaymentContract',
         required: false
     },
