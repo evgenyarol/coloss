@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Contract = require('../../models/contract/contract');
-const PaymentContract = require('../../models/paymentContract/paymentContract');
+
+
 
 router.post('/', async (req, res) => {
     const { contractId , date , contractType , rate, car, tenant, phone, paymentContract } = req.body;
@@ -17,9 +18,11 @@ router.post('/', async (req, res) => {
     });
 });
 
+
 router.get('/:id', async (req, res) => {
     const { _id } = req.body;
     const id = req.params.id;
+
     await Contract
     .findOne({owner: _id, _id: id})
     .then(contract => {
@@ -54,7 +57,6 @@ router.put('/:id', async (req, res) => {
     const id = req.params.id;
     const { _id } = req.body;
     
-
     await Contract
     .updateOne({owner: _id, _id: id}, { $set: { contractId , date , contractType , rate, car, tenant, phone }})
     .then(contract => {
@@ -65,12 +67,13 @@ router.put('/:id', async (req, res) => {
             return res.sendStatus(400);
     });
 });
+
+
 router.put('/payment/:id', async (req, res) => {
     const { date , paymentType , rates, organization, amount, contrId  } = req.body;
     const id = req.params.id;
     const { _id } = req.body;
     
-
     await Contract
     .updateOne({owner: _id, _id: id}, { $push: { paymentContract : {date , paymentType , rates, organization, amount, contrId }}})
     .then(contract => {
