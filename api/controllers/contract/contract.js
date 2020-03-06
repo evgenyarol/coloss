@@ -86,6 +86,23 @@ router.put('/payment/:id', async (req, res) => {
 });
 
 
+router.put('/parking/:id', async (req, res) => {
+    const { amount  } = req.body;
+    const id = req.params.id;
+    const { _id } = req.body;
+    
+    await Contract
+    .updateOne({owner: _id, _id: id}, { $push: { parking : { amount }}})
+    .then(contract => {
+            return res.json(contract);
+    })
+    .catch(err => {
+            console.error('Contract.Contract.put', err);
+            return res.sendStatus(400);
+    });
+});
+
+
 router.delete('/:id', async (req, res) => {
     const id = req.params.id;
     const { _id } = req.body;

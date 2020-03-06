@@ -8,5 +8,6 @@ router.use('/cars', jwtCheck, require('./controllers/car/car'))
 router.use('/tenant', jwtCheck, require('./controllers/tenant/tenant'))
 router.use('/organization', jwtCheck, require('./controllers/organization/organization'))
 router.use('/contract', jwtCheck, require('./controllers/contract/contract'))
+router.use('/salary', jwtCheck, require('./controllers/salary/salary'))
 
 module.exports = router; 

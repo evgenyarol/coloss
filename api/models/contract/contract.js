@@ -18,7 +18,10 @@ const contract = mongoose.Schema({
     },
     paymentContract: {
         type: Object,
-        ref: 'PaymentContract',
+        required: false
+    },
+    parking: {
+        type: Object,
         required: false
     },
     phone: { type: Number, required: true },
