@@ -1,9 +1,9 @@
 const mongoose = require('../../../db/db');
 const { Schema: {Types: { Number, Date }}} = mongoose;
 
-const office = mongoose.Schema({
-    date : { type: Number, default: Date.Now},
+const other = mongoose.Schema({
+    date : { type: Number, default: Date.getTime},
     amount: { type: Number, required: false}
  })
 
-module.exports = mongoose.model('Office', office)
+module.exports = mongoose.model('Other', other)

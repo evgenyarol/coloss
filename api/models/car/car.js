@@ -1,5 +1,5 @@
 const mongoose = require('../../../db/db');
-const { Schema: {Types: { String, Number}}} = mongoose;
+const { Schema: {Types: { String, Number }}} = mongoose;
 
 const car = mongoose.Schema({
     mark: { type: String, required: true},

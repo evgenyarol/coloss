@@ -24,7 +24,7 @@ router.get('/:id', async (req, res) => {
     const id = req.params.id;
 
     await Contract
-    .findOne({owner: _id, _id: id})
+    .findOne({owner: _id, _id: id},{ totalCost: { $sum : "paymentContract.amount" }})
     .then(contract => {
         return res.json(contract);
     })
@@ -36,12 +36,12 @@ router.get('/:id', async (req, res) => {
 
 
 router.get('/', async (req, res) => {
-    const { _id } = req.body;
 
     await Contract
-    .find({owner: _id})
-    .populate('car')
-    .populate('tenant')
+    .find({})
+    // .aggregate([ { 
+    //     $unwind: "$paymentContract" 
+    // }, {$group :{ _id : "Tital", totalCost: { $sum : "$paymentContract.amount" }}}])
     .then(contract => {
         return res.json(contract);
     })
@@ -70,12 +70,14 @@ router.put('/:id', async (req, res) => {
 
 
 router.put('/payment/:id', async (req, res) => {
-    const { date , paymentType , rates, organization, amount, contrId  } = req.body;
+    const { paymentType , rate, organization } = req.body;
+    let  date = new Date().getTime();
+    const amount = parseInt(req.body.amount)
     const id = req.params.id;
     const { _id } = req.body;
     
     await Contract
-    .updateOne({owner: _id, _id: id}, { $push: { paymentContract : {date , paymentType , rates, organization, amount, contrId }}})
+    .updateOne({owner: _id, _id: id}, { $push: { paymentContract : { date , paymentType , rate, organization, amount }}})
     .then(contract => {
             return res.json(contract);
     })
@@ -87,7 +89,7 @@ router.put('/payment/:id', async (req, res) => {
 
 
 router.put('/parking/:id', async (req, res) => {
-    const { amount  } = req.body;
+    const amount = parseInt(req.body.amount);
     const id = req.params.id;
     const { _id } = req.body;
     

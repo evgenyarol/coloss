@@ -1,8 +1,9 @@
 const mongoose = require('../../../db/db');
-const { Schema: {Types: { Array }}} = mongoose;
+const { Schema: {Types: { Number, Date }}} = mongoose;
 
 const credit = mongoose.Schema({
-    credit: { type: Array, required: false}
+    date : { type: Number, default: Date.getTime},
+    amount: { type: Number, required: false}
  })
 
 module.exports = mongoose.model('Credit', credit)

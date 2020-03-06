@@ -9,15 +9,16 @@ const contract = mongoose.Schema({
     car: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Car',
-        required: true
+        required: false
     },
     tenant: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Tenant',
-        required: true
+        required: false
     },
     paymentContract: {
         type: Object,
+        ref: 'PaymentContract',
         required: false
     },
     parking: {
