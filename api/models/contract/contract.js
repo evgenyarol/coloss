@@ -3,7 +3,7 @@ const { Schema: {Types: { String, Object, Number}}} = mongoose;
 
 const contract = mongoose.Schema({
     contractId: { type: Number, required: true },
-    date: { type: String, required: true },
+    date : { type: Number, default: Date.Now},
     contractType: { type: String, required: true },
     rate: { type: Number, required: true },
     car: {
@@ -23,6 +23,7 @@ const contract = mongoose.Schema({
     },
     parking: {
         type: Object,
+        ref: 'Parking',
         required: false
     },
     phone: { type: Number, required: true },

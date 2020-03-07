@@ -24,7 +24,7 @@ router.get('/:id', async (req, res) => {
     const id = req.params.id;
 
     await Contract
-    .findOne({owner: _id, _id: id},{ totalCost: { $sum : "paymentContract.amount" }})
+    .findOne({owner: _id, _id: id})
     .then(contract => {
         return res.json(contract);
     })
@@ -53,7 +53,8 @@ router.get('/', async (req, res) => {
 
 
 router.put('/:id', async (req, res) => {
-    const { contractId , date , contractType , rate, car, tenant, phone } = req.body;
+    const { contractId , contractType , rate, car, tenant, phone } = req.body;
+    const date = new Date().getTime();
     const id = req.params.id;
     const { _id } = req.body;
     
@@ -71,7 +72,7 @@ router.put('/:id', async (req, res) => {
 
 router.put('/payment/:id', async (req, res) => {
     const { paymentType , rate, organization } = req.body;
-    let  date = new Date().getTime();
+    const date = new Date().getTime();
     const amount = parseInt(req.body.amount)
     const id = req.params.id;
     const { _id } = req.body;
