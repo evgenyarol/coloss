@@ -5,9 +5,10 @@ const Salary = require('../../../models/salary/salary');
 router.post('/', async (req, res) => {
     const { amount } = req.body;
     const { _id } = req.jwt;
+    let  date = new Date().getTime();
 
     await Salary
-    .create({owner: _id, amount })
+    .create({owner: _id, amount, date })
     .then(salary => {
         return res.json(salary);
     })
